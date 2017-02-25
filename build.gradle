@@ -1,0 +1,17 @@
+group 'jamsandwich'
+version '0.1'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+mainClassName = "jamsandwich.spacething.Main"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+}
