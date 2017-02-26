@@ -82,17 +82,18 @@ public class RenderHandler {
 	}
 	
 	static void renderSprite(Sprite s) {
+		RawModel m = s.getModel();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, Display.getWidth(), Display.getHeight(), 0, 1, -1);
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glPolygonMode(GL_FRONT_AND_BACK, SpriteHelper.fills[s.fill]);
-		glColor3f(s.colour[0], s.colour[1], s.colour[2]);
-		glBegin(SpriteHelper.shapes[s.shape]);
+		glPolygonMode(GL_FRONT_AND_BACK, SpriteHelper.fills[m.fill]);
+		glColor3f(m.colour[0], m.colour[1], m.colour[2]);
+		glBegin(SpriteHelper.shapes[m.shape]);
 		glLineWidth(1);
-		for(int i = 0 ; i < s.vertices.length; i++) {
-			glVertex2f((int)s.vertices[i][0], (int)s.vertices[i][1]);
+		for(int i = 0 ; i < m.mesh.length; i++) {
+			glVertex2f((int)(m.mesh[i].x+s.position.x), (int)(m.mesh[i].y+s.position.y));
 		}
 		glEnd();
 	}

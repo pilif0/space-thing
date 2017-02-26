@@ -27,15 +27,6 @@ public class RenderRegistry {
 		entityRegistry.add(e);
 	}
 	
-	public static Sprite getSprite(String name) {
-		for(Sprite s : spriteRegistry) {
-			if(s.name.equals(name)) {
-				return s;
-			}
-		}
-		return null;
-	}
-	
 	public static Text getText(String text) {
 		for(Text t : textRegistry) {
 			if(t.label.equals(text)) {
@@ -44,12 +35,8 @@ public class RenderRegistry {
 		}
 		return null;
 	}
-	
-	public static void removeSprite(String sprite) {
-		for(int i = 0; i < spriteRegistry.size(); i++) {
-			if(spriteRegistry.get(i).name.equals(sprite)) {
-				spriteRegistry.remove(i);
-			}
-		}
+
+	public static void removeSprite(Sprite s) {
+		spriteRegistry.remove(s);
 	}
 }

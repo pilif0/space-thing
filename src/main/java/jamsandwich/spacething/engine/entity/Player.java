@@ -2,6 +2,7 @@ package jamsandwich.spacething.engine.entity;
 
 import org.lwjgl.input.Keyboard;
 
+import jamsandwich.spacething.engine.event.KeyHandler;
 import jamsandwich.spacething.engine.event.KeyListener;
 
 public class Player extends GravitationalBody implements KeyListener{
@@ -13,11 +14,11 @@ public class Player extends GravitationalBody implements KeyListener{
 	int timer = 0;
 	int fuel = 0;
 	public boolean started = false;
-	final double speed = 50;
+	final double speed = 1000;
 	
 	public Player(double x, double y) {
 		super(x,y,radius,mass,colour);
-		setName("Player");
+		KeyHandler.addKeyListener(this);
 	}
 
 	@Override
@@ -38,16 +39,16 @@ public class Player extends GravitationalBody implements KeyListener{
 	@Override
 	public void keyHeld() {
 		if(keys[Keyboard.KEY_W]) {
-			applyForce(0,50,0,0);
+			addForce(0,-speed);
 		}
 		if(keys[Keyboard.KEY_A]) {
-			applyForce(-50,0,0,0);
+			addForce(-speed,0);
 		}
 		if(keys[Keyboard.KEY_S]) {
-			applyForce(0,-50,0,0);
+			addForce(0,speed);
 		}
 		if(keys[Keyboard.KEY_D]) {
-			applyForce(50,0,0,0);
+			addForce(speed,0);
 		}
 	}
 

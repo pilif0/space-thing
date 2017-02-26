@@ -1,20 +1,24 @@
 package jamsandwich.spacething.engine.event;
 
+import java.util.ArrayList;
+
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 
-import jamsandwich.spacething.engine.physics.PhysicsEngine;
-import jamsandwich.spacething.engine.render.Sprite;
+public class KeyHandler{
 
-public class KeyHandler extends PhysicsEngine{
+	static ArrayList<KeyListener> listeners = new ArrayList<KeyListener>();
 
-	public KeyHandler(int p) {
-		super(p);
+	public static void clear() {
+		listeners.clear();
 	}
 
-	@Override
-	public void tickSprite(int tick, Sprite s) {
-		if(s instanceof KeyListener) {
+	public static void addKeyListener(KeyListener l) {
+		listeners.add(l);
+	}
+
+	public static void tick() {
+		for(KeyListener s : listeners) {
 			while(Keyboard.next()) {
 				if(Keyboard.getEventKeyState()) {
 					((KeyListener)s).keyPressed(Keyboard.getEventKey());
